@@ -2,23 +2,26 @@ package com.wzj.controller;
 
 import com.wzj.mapper.C_AttachmentMapper;
 import com.wzj.pojo.C_Attachment;
-
 import com.wzj.uilts.IoInput;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
-@Component
-@RestController
+
+@Controller
+@RequestMapping("/file")
 public class C_AttachmentController {
 
     @Autowired
     private C_AttachmentMapper c_attachmentMapper;
-    @GetMapping("getList")
+    @GetMapping("/getList")
     public List<C_Attachment> getList(){
         List<C_Attachment> list = c_attachmentMapper.getList();
         for (C_Attachment c_attachment : list) {
@@ -26,13 +29,20 @@ public class C_AttachmentController {
         }return list;
     }
 
-    @GetMapping("addList")
-    public String addList(){
+    @PostMapping(value = "/upload")
+    public String addList(@RequestParam("file") MultipartFile file) throws IOException {
         LocalDateTime now=LocalDateTime.now();
-        String file= IoInput.input();
-        String name=IoInput.fileName();
-        int i = c_attachmentMapper.addList(new C_Attachment(2,file,name,now));
-        return "ok";
+        InputStream in=file.getInputStream();
+        String fe=IoInput.input(in);
+        String name=file.getOriginalFilename();
+        int i = c_attachmentMapper.addList(new C_Attachment(2,fe,name,now));
+        return "file";
     }
+    @RequestMapping("/hello")
+    public String hello(Model m){
+        m.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
+        return "hello";  //视图重定向hello.jsp
+    }
+
 
 }
