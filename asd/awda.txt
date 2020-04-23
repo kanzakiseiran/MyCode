@@ -1,0 +1,29 @@
+//    @GetMapping("addList")
+//    public String addList(){
+//        LocalDateTime now=LocalDateTime.now();
+//        File file=new File("src/main/resources/a.txt");
+//        int[] num = new int[5000];
+//        InputStream is = null;
+//        try {
+//            is = new FileInputStream(file);
+//            int tem;
+//
+//            while((tem=is.read())!=-1){
+//                i++;
+//                num[i]=tem;
+//            }
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }finally {
+//            try {
+//                is.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        c_attachmentMapper.addList(new C_Attachment(1,num,"文件名",now));
+//        return "ok";
+//    }

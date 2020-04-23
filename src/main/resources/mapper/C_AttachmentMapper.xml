@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzj.mapper.C_AttachmentMapper">
+
+    <select id="getList" resultType="C_Attachment">
+        select * from c_attachment
+    </select>
+    <insert id="addList" parameterType="C_Attachment" >
+        insert into c_attachment (id,file,name,time) values (#{id},#{file},#{name},#{time})
+    </insert>
+
+</mapper>
