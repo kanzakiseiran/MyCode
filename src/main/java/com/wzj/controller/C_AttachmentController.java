@@ -16,27 +16,24 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/file")
 public class C_AttachmentController {
 
     @Autowired
     private C_AttachmentMapper c_attachmentMapper;
-    @GetMapping("/getList")
-    public List<C_Attachment> getList(){
-        List<C_Attachment> list = c_attachmentMapper.getList();
-        for (C_Attachment c_attachment : list) {
-            System.out.println(c_attachment);
-        }return list;
+    @GetMapping("/upload")
+    public String upload(){
+        return "upload";
     }
 
     @PostMapping(value = "/upload")
+    @ResponseBody
     public String addList(@RequestParam("file") MultipartFile file) throws IOException {
         LocalDateTime now=LocalDateTime.now();
         InputStream in=file.getInputStream();
         String fe=IoInput.input(in);
         String name=file.getOriginalFilename();
-        int i = c_attachmentMapper.addList(new C_Attachment(2,fe,name,now));
-        return "file";
+        int i = c_attachmentMapper.addList(new C_Attachment(fe,name,now));
+        return "upload";
     }
     @RequestMapping("/hello")
     public String hello(Model m){
@@ -45,4 +42,13 @@ public class C_AttachmentController {
     }
 
 
+// @GetMapping ("/getList")
+// public List<C_Attachment> getList() {
+//     List<C_Attachment> list = c_attachmentMapper.getList();
+//     for (C_Attachment c_attachment : list) {
+//         System.out.println(c_attachment);
+//     }
+//     return list;
+//
+// }
 }

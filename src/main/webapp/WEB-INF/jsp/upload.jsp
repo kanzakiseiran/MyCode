@@ -12,8 +12,8 @@
     <title>文件上传</title>
 </head>
 <body>
-<form enctype="multipart/form-data" method="post" action="file/upload">
-    <input type="file" name="file"/>
+<form enctype="multipart/form-data" method="post" action="/upload">
+    <input type="file" name="file"/><br>
     <input type="submit" value="上传"/>
 </form>
 <%--<a href="/file/download">文件下载</a>--%>

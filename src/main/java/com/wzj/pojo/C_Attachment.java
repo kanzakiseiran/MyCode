@@ -53,8 +53,7 @@ public class C_Attachment {
         this.time = time;
     }
 
-    public C_Attachment(int id, String file, String name, LocalDateTime time) {
-        this.id = id;
+    public C_Attachment(String file, String name, LocalDateTime time) {
         this.file = file;
         this.name = name;
         this.time = time;

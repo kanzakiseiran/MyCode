@@ -12,13 +12,13 @@ public class IoInput {
 
             //选择流
 
-            InputStream is =null;
-
+            InputStream is =srcPath;
+            FileInputStream fis=(FileInputStream)is;
             try {
-                is=new FileInputStream(String.valueOf(srcPath));
+
                 byte[] flush=new byte[1024*1024*1024];
                 int len=-1;
-                while ((len=is.read(flush))!=-1){
+                while ((len=fis.read(flush))!=-1){
                     str=new String(flush,0,len);
 
                 }
@@ -30,6 +30,7 @@ public class IoInput {
             }finally {
                 try {
                     is.close();
+                    fis.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

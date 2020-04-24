@@ -8,7 +8,7 @@
         select * from c_attachment
     </select>
     <insert id="addList" parameterType="C_Attachment" >
-        insert into c_attachment (id,file,name,time) values (#{id},#{file},#{name},#{time})
+        insert into c_attachment (file,name,time) values (#{file},#{name},#{time})
     </insert>
 
 </mapper>
