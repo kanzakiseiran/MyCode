@@ -2,6 +2,7 @@ package com.wzj.controller;
 
 import com.wzj.mapper.C_AttachmentMapper;
 import com.wzj.pojo.C_Attachment;
+import com.wzj.uilts.Copy;
 import com.wzj.uilts.IoInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,10 @@ public class C_AttachmentController {
     public String addList(@RequestParam("file") MultipartFile file) throws IOException {
         LocalDateTime now=LocalDateTime.now();
         InputStream in=file.getInputStream();
-        String fe=IoInput.input(in);
         String name=file.getOriginalFilename();
+        Copy a=new Copy();
+        a.copy(in,name);
+        String fe="D:\\JavaWork\\wzj-test\\"+name;
         int i = c_attachmentMapper.addList(new C_Attachment(fe,name,now));
         return "upload";
     }
